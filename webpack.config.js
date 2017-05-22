@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-    entry: './rolun-js.js',
+    entry: './rollun-js.js',
     output: {
         filename: 'index.js',
         library: 'index',
