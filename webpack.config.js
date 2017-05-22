@@ -5,7 +5,7 @@ module.exports = {
     entry: './rollun-js.js',
     output: {
         filename: 'index.js',
-        library: 'index',
+        library: 'RollunJs',
         libraryTarget: 'var'
     },
     module: {
