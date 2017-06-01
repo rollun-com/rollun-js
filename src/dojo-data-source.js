@@ -173,8 +173,10 @@ DojoDataSource.prototype.fetch = function (request, post_process) {
             return q;
         };
         query = make_query(request.filter);
-        rql += "" + query.toString();
+        rql += "&" + query.toString();
     }
+
+    console.log(rql);
 
     if (rql !== '') filter = filter.filter(rql);
 
