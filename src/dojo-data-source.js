@@ -90,6 +90,7 @@ DojoDataSource.prototype.fetch = function (request, post_process) {
     let self = this;
     let filter = null;
     let Q = Query;
+    let rql = [];
 
     request = request || this._request;
     post_process = post_process || this._post_process;
@@ -116,13 +117,8 @@ DojoDataSource.prototype.fetch = function (request, post_process) {
         request.select = _.concat(request.select, aggregates);
     }
 
-    let rql = request.select
-        ? "select(" + request.select.join(',') + ")"
-        : "";
-
-    rql += request.group.length > 0
-        ? "&groupby(" + request.group.join(',') + ")"
-        : "";
+    if (request.select) rql.push("select(" + request.select.join(',') + ")");
+    if (request.group.length > 0) rql.push("groupby(" + request.group.join(',') + ")");
 
     if (request.filter) {
         let query = Q();
@@ -173,12 +169,10 @@ DojoDataSource.prototype.fetch = function (request, post_process) {
             return q;
         };
         query = make_query(request.filter);
-        rql += "&" + query.toString();
+        if (query.args.length > 0) rql.push(query.toString());
     }
 
-    console.log(rql);
-
-    if (rql !== '') filter = filter.filter(rql);
+    if (rql.length > 0) filter = filter.filter(rql.join('&'));
 
     let result = filter.fetchRange({start: request.offset, end: request.offset + request.limit});
 
