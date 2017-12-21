@@ -68,7 +68,7 @@ DojoDataSource.prototype.schema = function (schema) {
 };
 
 DojoDataSource.prototype.post = function (item) {
-    return this._store.put(item);
+    return this._store.post(item);
 };
 
 DojoDataSource.prototype.put = function (item) {
