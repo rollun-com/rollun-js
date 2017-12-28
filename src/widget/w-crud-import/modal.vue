@@ -19,10 +19,10 @@
                     <div class="modal-footer">
                         <slot name="footer">
 
-                            <button class="modal-default-button" @click="$emit('close')">
+                            <button class="modal-default-button btn btn-default btn-md" @click="$emit('close')">
                                 Cancel
                             </button>
-                            <button class="modal-default-button" @click="addBrands(input)">
+                            <button class="modal-default-button btn btn-primary btn-md" @click="addBrands(input)">
                                 Save
                             </button>
                         </slot>
@@ -85,7 +85,7 @@
         width: 500px;
         max-height: 80%;
         margin: 5px auto;
-        padding: 20px 20px;
+        padding: 10px;
         background-color: #fff;
         border-radius: 2px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
@@ -102,8 +102,13 @@
 
     }
 
+    .modal-footer {
+        margin: 5px;
+    }
+
     .modal-default-button {
         float: right;
+        margin: 5px;
     }
 
     /*

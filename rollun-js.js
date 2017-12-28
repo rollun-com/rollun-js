@@ -8,7 +8,7 @@ import wCrudImport from './src/widget/w-crud-import/importer.vue'
 import mitt from 'mitt';
 import DojoDataSource from './src/dojo-data-source'
 
-const components = [wEditForm, wString,wCrudImport, wCrudApp];
+const components = [wEditForm, wString, wCrudImport, wCrudApp];
 
 components.map(function (c) {
     Vue.component(c.name, c);
