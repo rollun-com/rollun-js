@@ -3,7 +3,7 @@
 import wCrudApp from './src/widget/w-crud-app'
 import wEditForm from './src/widget/w-edit-form'
 import wString from './src/widget/w-string'
-import wCrudImport from '../../w-crud-import'
+import wCrudImport from './src/widget/w-crud-import/importer.vue'
 
 import mitt from 'mitt';
 import DojoDataSource from './src/dojo-data-source'
