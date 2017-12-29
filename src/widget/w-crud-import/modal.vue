@@ -40,7 +40,6 @@
         data: function () {
             return {
                 input: '',
-                buttonLabel: 'Add Brands'
             };
 
         },
