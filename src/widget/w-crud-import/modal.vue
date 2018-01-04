@@ -23,10 +23,10 @@
                         <slot name="footer">
 
                             <button class="modal-default-button btn btn-default btn-md" @click="$emit('close')">
-                                Сохранить
+                                Отменить
                             </button>
                             <button class="modal-default-button btn btn-primary btn-md" @click="addBrands(input)">
-                                Отменить
+                                Сохранить
                             </button>
                         </slot>
                     </div>
