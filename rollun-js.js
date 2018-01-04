@@ -6,7 +6,7 @@ import Vue from 'vue'
 import wCrudApp from './src/widget/w-crud-app'
 import wEditForm from './src/widget/w-edit-form'
 import wString from './src/widget/w-string'
-import wCrudImport from './src/widget/w-crud-brand-import/brandImporter.vue'
+import wCrudImport from './src/widget/w-crud-import/brandImporter.vue'
 //event emitter
 import mitt from 'mitt';
 //datastore

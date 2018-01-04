@@ -35,8 +35,10 @@
 
 <script>
     import mitt from 'mitt';
+
     export default {
         name: 'modal',
+        props: ['noid'],
         data: function () {
             return {
                 input: '',
@@ -48,15 +50,25 @@
                 this._writeItems(value);
                 this.$emit('close');
             },
+            _getTableColumns: function (noid) {
+                let tableColumns = Object.keys(app.$refs.crud.items.schema());
+                if (noid === '1'){tableColumns.shift()}
+                return tableColumns;
+            },
             _writeItems: function (value) {
+                let self = this;
                 value = value.split("\n");
                 value.forEach(function (item) {
-                    item = item.split("\t");
-                    let result = {};
-                    result["brand"] = item[0];
-                    result["category"] = item[1];
-                    app.$refs.crud.items.post(result);
-                });
+                        item = item.split("\t");
+                        let result = {};
+                        let tableColumns = self._getTableColumns(self.noid);
+                        item.forEach(function (item, index) {
+                            result[tableColumns[index]] = item;
+                        });
+                        app.$refs.crud.items.post(result);
+                    }
+                )
+                ;
             },
         }
     }
