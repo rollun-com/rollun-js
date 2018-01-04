@@ -4,7 +4,7 @@
         <modal v-if="showModal" @close="showModal = false"
                v-bind:noid="noid"
                v-bind:placeholder="placeholder"
-               v-bind:modaltitle="modaltitle">
+               v-bind:popuptitle="popuptitle">
         </modal>
     </div>
 </template>

@@ -6,13 +6,16 @@
 
                     <div class="modal-header">
                         <slot name="header">
-                            <h3>Добавление брэндов</h3>
+                            <h3>{{popuptitle}}</h3>
                         </slot>
                     </div>
 
                     <div class="modal-body">
                         <slot name="body">
-                            <textarea id="editor" v-model="input" placeholder="Введите брэнды сюда"></textarea>
+                            <textarea id="editor"
+                                      v-model="input"
+                                      v-bind:placeholder='placeholder'>
+                            </textarea>
                         </slot>
                     </div>
 
@@ -20,10 +23,10 @@
                         <slot name="footer">
 
                             <button class="modal-default-button btn btn-default btn-md" @click="$emit('close')">
-                                Cancel
+                                Сохранить
                             </button>
                             <button class="modal-default-button btn btn-primary btn-md" @click="addBrands(input)">
-                                Save
+                                Отменить
                             </button>
                         </slot>
                     </div>
@@ -38,7 +41,7 @@
 
     export default {
         name: 'modal',
-        props: ['noid'],
+        props: ['noid', 'placeholder', 'popuptitle'],
         data: function () {
             return {
                 input: '',
