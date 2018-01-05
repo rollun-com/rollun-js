@@ -2,6 +2,7 @@
     <div id="w-crud-import">
         <button class="btn btn-default btn-md" id="show-modal" @click="showModal = true">{{label}}</button>
         <modal v-if="showModal" @close="showModal = false"
+               v-bind:importfields="importfields"
                v-bind:noid="noid"
                v-bind:placeholder="placeholder"
                v-bind:popuptitle="popuptitle">
@@ -17,7 +18,7 @@
         name: 'w-crud-import',
         mixins: [widget],
         components: {'modal': modal},
-        props: ['label', 'noid', 'placeholder', 'popuptitle'],
+        props: ['label', 'importfields', 'noid', 'placeholder', 'popuptitle'],
         data: function () {
             return {
                 showModal: false,

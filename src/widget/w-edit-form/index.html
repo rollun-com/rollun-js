@@ -1,7 +1,6 @@
 <div v-show="visible" class="w-edit-form">
 	<div class="content">
 		<div class="body">
-
 			<ul v-if="form.tabs" class="nav nav-tabs" role="tablist">
 				<li v-for="tab, key in form.tabs" :class="tab.active">
 					<a :href="'#' + key + '-tab-' + _uid" data-toggle="tab">{{ tab.title }}</a>

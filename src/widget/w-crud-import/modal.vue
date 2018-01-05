@@ -41,30 +41,35 @@
 
     export default {
         name: 'modal',
-        props: ['noid', 'placeholder', 'popuptitle'],
+        props: ['importfields', 'noid', 'placeholder', 'popuptitle'],
         data: function () {
             return {
                 input: '',
             };
-
         },
         methods: {
             addBrands: function (value) {
                 this._writeItems(value);
                 this.$emit('close');
             },
-            _getTableColumns: function (noid) {
-                let tableColumns = Object.keys(app.$refs.crud.items.schema());
-                if (noid === '1'){tableColumns.shift()}
+            _getTableColumns: function (noid, importfields) {
+                importfields = JSON.parse(importfields);
+                if (!(importfields === null)) {
+                    return importfields
+                }
+                var tableColumns = Object.keys(app.$refs.crud.items.schema());
+                if (noid === '1') {
+                    tableColumns.shift()
+                }
                 return tableColumns;
             },
             _writeItems: function (value) {
-                let self = this;
+                var self = this;
                 value = value.split("\n");
                 value.forEach(function (item) {
                         item = item.split("\t");
-                        let result = {};
-                        let tableColumns = self._getTableColumns(self.noid);
+                    var result = {};
+                    var tableColumns = self._getTableColumns(self.noid, self.importfields);
                         item.forEach(function (item, index) {
                             result[tableColumns[index]] = item;
                         });
