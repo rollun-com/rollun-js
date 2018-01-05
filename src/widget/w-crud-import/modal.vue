@@ -41,7 +41,7 @@
 
     export default {
         name: 'modal',
-        props: ['importfields', 'noid','inputseparator', 'waaagh','placeholder', 'popuptitle'],
+        props: ['importfields', 'noid','inputseparator','placeholder', 'popuptitle'],
         data: function () {
             return {
                 input: '',
@@ -69,13 +69,11 @@
                 value = value.split("\n");
                 value.forEach(function (item) {
                         item = item.split(self.inputseparator);
-                        console.log(item);
                     var result = {};
                     var tableColumns = self._getTableColumns(self.noid, self.importfields);
                         item.forEach(function (item, index) {
                             result[tableColumns[index]] = item;
                         });
-                        console.log(result);
                         app.$refs.crud.items.post(result);
                     }
                 )
