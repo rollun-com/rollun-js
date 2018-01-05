@@ -41,7 +41,7 @@
 
     export default {
         name: 'modal',
-        props: ['importfields', 'noid', 'placeholder', 'popuptitle'],
+        props: ['importfields', 'noid','inputseparator', 'waaagh','placeholder', 'popuptitle'],
         data: function () {
             return {
                 input: '',
@@ -54,11 +54,12 @@
             },
             _getTableColumns: function (noid, importfields) {
                 importfields = JSON.parse(importfields);
+                noid = JSON.parse(noid);
                 if (!(importfields === null)) {
-                    return importfields
+                    return importfields;
                 }
                 var tableColumns = Object.keys(app.$refs.crud.items.schema());
-                if (noid === '1') {
+                if (noid === true) {
                     tableColumns.shift()
                 }
                 return tableColumns;
@@ -67,12 +68,14 @@
                 var self = this;
                 value = value.split("\n");
                 value.forEach(function (item) {
-                        item = item.split("\t");
+                        item = item.split(self.inputseparator);
+                        console.log(item);
                     var result = {};
                     var tableColumns = self._getTableColumns(self.noid, self.importfields);
                         item.forEach(function (item, index) {
                             result[tableColumns[index]] = item;
                         });
+                        console.log(result);
                         app.$refs.crud.items.post(result);
                     }
                 )
