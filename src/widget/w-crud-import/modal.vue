@@ -41,7 +41,7 @@
 
     export default {
         name: 'modal',
-        props: ['importfields', 'noid', 'placeholder', 'popuptitle'],
+        props: ['importfields', 'noid', 'inputseparator', 'placeholder', 'popuptitle'],
         data: function () {
             return {
                 input: '',
@@ -51,14 +51,16 @@
             addBrands: function (value) {
                 this._writeItems(value);
                 this.$emit('close');
+                app.$refs.crud.refresh();
             },
             _getTableColumns: function (noid, importfields) {
                 importfields = JSON.parse(importfields);
                 if (!(importfields === null)) {
-                    return importfields
+                    return importfields;
                 }
+                noid = JSON.parse(noid);
                 var tableColumns = Object.keys(app.$refs.crud.items.schema());
-                if (noid === '1') {
+                if (noid === true) {
                     tableColumns.shift()
                 }
                 return tableColumns;
@@ -66,17 +68,16 @@
             _writeItems: function (value) {
                 var self = this;
                 value = value.split("\n");
-                value.forEach(function (item) {
-                        item = item.split("\t");
-                    var result = {};
-                    var tableColumns = self._getTableColumns(self.noid, self.importfields);
-                        item.forEach(function (item, index) {
-                            result[tableColumns[index]] = item;
+                var tableColumns = self._getTableColumns(self.noid, self.importfields);
+                value.forEach(function (row) {
+                        var items = row.split(self.inputseparator);
+                        var result = {};
+                        tableColumns.forEach(function (column, index) {
+                            result[column] = (items[index] === undefined ? "" : items[index]);
                         });
                         app.$refs.crud.items.post(result);
                     }
-                )
-                ;
+                );
             },
         }
     }

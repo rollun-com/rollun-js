@@ -4,6 +4,7 @@
         <modal v-if="showModal" @close="showModal = false"
                v-bind:importfields="importfields"
                v-bind:noid="noid"
+               v-bind:inputseparator="inputseparator"
                v-bind:placeholder="placeholder"
                v-bind:popuptitle="popuptitle">
         </modal>
@@ -18,7 +19,7 @@
         name: 'w-crud-import',
         mixins: [widget],
         components: {'modal': modal},
-        props: ['label', 'importfields', 'noid', 'placeholder', 'popuptitle'],
+        props: ['label', 'importfields', 'noid','inputseparator', 'placeholder', 'popuptitle'],
         data: function () {
             return {
                 showModal: false,
