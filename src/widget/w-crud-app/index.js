@@ -21,6 +21,8 @@ export default  {
             edit_mode: false,
             items: this.$ds(this.url, {
                 on_load: function (items) {
+                    $(self.$refs.loadingIcon).hide();
+                    $(self.$refs.dataTable).show();
                     _.debounce(function () {
                         $(self.$refs.btn_refresh).removeClass('fa-spin');
                     }, 300)();
