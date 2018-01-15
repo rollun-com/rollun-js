@@ -19,7 +19,7 @@
         };
     </script>
     <script src="../node_modules/dojo/dojo.js"></script>
-    <script src="../index.js"></script>
+    <script src="../y-rollun-js.js"></script>
     <script>$(function () {
         require(['dojo/_base/declare', 'dstore/Rest', 'dstore/extensions/RqlQuery', 'rql/query'], function (declare, Rest, RqlQuery, query) {
             window.RqlStore = declare([Rest, RqlQuery]);
@@ -30,7 +30,7 @@
     </script>
 </head>
 <body>
-<div id="example">
+<div id="example" style='margin: 1%'>
     <w-crud-app ref='crud' title='myTable' url='/rollun-js/examples/example.json' v-bind:options='{}'></w-crud-app>
 </div>
 </body>
