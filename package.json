@@ -16,7 +16,7 @@
     "bootbox": "^4.4.0",
     "bootstrap": "^3.3.7",
     "css-loader": "^0.26.2",
-    "dojo-rql": "^0.3.1",
+    "dojo-rql": "^0.3.x",
     "file-loader": "^0.10.1",
     "html-loader": "^0.4.5",
     "jquery": "^3.1.1",
