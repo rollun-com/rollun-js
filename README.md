@@ -1,5 +1,6 @@
 # rollun-js
-Библиотека, содержащая все графические компоненты rollun. Использует [Vue](https://vuejs.org/) и [dstore](http://dstorejs.io/)
+Библиотека, содержащая все графические компоненты rollun.
+[Важные моменты]().
 
 ## Содержание
 1. [crudApp](https://github.com/rollun-com/rollun-js/blob/master/docs/crudApp.md) - отображает [DataStore](https://github.com/rollun-com/rollun-datastore) в виде таблицы и позволяет совершать CRUD операции через GUI.
