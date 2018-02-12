@@ -3,13 +3,11 @@
         <div class="modal-mask">
             <div class="modal-wrapper">
                 <div class="modal-container">
-
                     <div class="modal-header">
                         <slot name="header">
                             <h3>{{popuptitle}}</h3>
                         </slot>
                     </div>
-
                     <div class="modal-body">
                         <slot name="body">
                             <textarea id="editor"
@@ -18,10 +16,8 @@
                             </textarea>
                         </slot>
                     </div>
-
                     <div class="modal-footer">
                         <slot name="footer">
-
                             <button class="modal-default-button btn btn-default btn-md" @click="$emit('close')">
                                 Отменить
                             </button>
@@ -40,7 +36,7 @@
     import mitt from 'mitt';
 
     export default {
-        name: 'modal',
+        name: 'paste-modal',
         props: ['importfields', 'noid', 'inputseparator', 'placeholder', 'popuptitle'],
         data: function () {
             return {

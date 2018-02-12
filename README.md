@@ -1,5 +1,6 @@
 # rollun-js
 Библиотека, содержащая все графические компоненты rollun.
+[Важные моменты]().
 
 ## Содержание
 1. [crudApp](https://github.com/rollun-com/rollun-js/blob/master/docs/crudApp.md) - отображает dataStore в виде таблицы и позволяет совершать CRUD операции через GUI.
