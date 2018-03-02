@@ -11,6 +11,7 @@ import wText from './src/widget/w-text'
 import wCheckBox from './src/widget/w-checkbox'
 import wCrudImport from './src/widget/w-crud-import/brandImporter.vue'
 import wCrudFile2DS from './src/widget/w-crud-file2ds/file2ds.vue'
+import wFbaFee from './src/widget/w-fbafee-calc/fbafee.vue'
 //event emitter
 import mitt from 'mitt';
 //datastore
@@ -26,7 +27,8 @@ const components = [
     wText,
     wCheckBox,
     wCrudImport,
-    wCrudFile2DS
+    wCrudFile2DS,
+    wFbaFee
 ];
 
 components.map(function (c) {
