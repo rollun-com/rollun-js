@@ -8,7 +8,9 @@
                      v-bind:placeholder="placeholder"
                      v-bind:popuptitle="popuptitle">
         </paste-modal>
-        <button class="btn btn-default btn-md" id="show-file2ds" v-on:click="showFile2DS = true">{{label+" (csv)"}}</button>
+        <button class="btn btn-default btn-md" id="show-file2ds" v-if="activateFile2DsButton"
+                v-on:click="showFile2DS = true">{{label+" (csv)"}}
+        </button>
         <w-crud-file2ds v-if="showFile2DS" v-on:close="showFile2DS = false"></w-crud-file2ds>
     </div>
 </template>
@@ -35,6 +37,9 @@
             'uploadmultiple',
             'uploadheaders'
         ],
+        created: function () {
+            this.activateFile2DsButton = Boolean(this.uploadurl);
+        },
         provide: function () {
             return {
                 formName: this.formname,
@@ -47,8 +52,9 @@
         data: function () {
             return {
                 showPasteModal: false,
-                showFile2DS: false
+                showFile2DS: false,
+                activateFile2DsButton: false
             }
-        },
+        }
     }
 </script>
