@@ -6,7 +6,8 @@
                      v-bind:noid="noid"
                      v-bind:inputseparator="inputseparator"
                      v-bind:placeholder="placeholder"
-                     v-bind:popuptitle="popuptitle">
+                     v-bind:popuptitle="popuptitle"
+                     v-bind:validatorname="validatorname">
         </paste-modal>
         <button class="btn btn-default btn-md" id="show-file2ds" v-if="activateFile2DsButton"
                 v-on:click="showFile2DS = true">{{label+" (csv)"}}
@@ -35,7 +36,8 @@
             'uploadurl',
             'uploadaccept',
             'uploadmultiple',
-            'uploadheaders'
+            'uploadheaders',
+            'validatorname'
         ],
         created: function () {
             this.activateFile2DsButton = Boolean(this.uploadurl);

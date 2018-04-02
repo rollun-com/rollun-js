@@ -10,6 +10,13 @@
                     </div>
                     <div class="modal-body">
                         <slot name="body">
+                            <div v-if="alertFail"
+                                 class="alert alert-danger" role="alert">
+                                {{"Error: " + alertFail}}
+                                <button v-on:click="alertFail = false" type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             <textarea id="editor"
                                       v-model="input"
                                       v-bind:placeholder='placeholder'>
@@ -37,18 +44,43 @@
 
     export default {
         name: 'paste-modal',
-        props: ['importfields', 'noid', 'inputseparator', 'placeholder', 'popuptitle'],
+        props: ['importfields', 'noid', 'inputseparator', 'placeholder', 'popuptitle', 'validatorname'],
         data: function () {
             return {
                 input: '',
+                alertFail: false,
             };
         },
         methods: {
             addBrands: function (value) {
-                this._writeItems(value);
+                var parsedValue = this._parseItemsToArray(value);
+                try {
+                    this._validate(parsedValue, this.validatorname);
+                } catch (exception) {
+                    this.alertFail = exception;
+                    return;
+                }
+                this._writeToStore(parsedValue);
                 this.$emit('close');
                 app.$refs.crud.refresh();
             },
+
+            _parseItemsToArray: function (value) {
+                var self = this;
+                var parsedValue = [];
+                value = value.split("\n");
+                var tableColumns = self._getTableColumns(self.noid, self.importfields);
+                value.forEach(function (row) {
+                        var items = row.split(self.inputseparator);
+                        var result = {};
+                        tableColumns.forEach(function (column, index) {
+                            result[column] = (items[index] === undefined ? "" : items[index]);
+                        });
+                    parsedValue.push(result)
+                    });
+                return parsedValue;
+            },
+
             _getTableColumns: function (noid, importfields) {
                 importfields = JSON.parse(importfields);
                 if (!(importfields === null)) {
@@ -61,20 +93,19 @@
                 }
                 return tableColumns;
             },
-            _writeItems: function (value) {
-                var self = this;
-                value = value.split("\n");
-                var tableColumns = self._getTableColumns(self.noid, self.importfields);
-                value.forEach(function (row) {
-                        var items = row.split(self.inputseparator);
-                        var result = {};
-                        tableColumns.forEach(function (column, index) {
-                            result[column] = (items[index] === undefined ? "" : items[index]);
-                        });
-                        app.$refs.crud.items.post(result);
-                    }
-                );
+
+            _validate: function (value, validatorName) {
+                var validatorFunction = window[validatorName];
+                if (typeof validatorFunction === 'function') {
+                    validatorFunction(value);
+                }
             },
+
+            _writeToStore: function (value) {
+                value.forEach(function (item) {
+                    app.$refs.crud.items.post(item);
+                })
+            }
         }
     }
 </script>
