@@ -7,7 +7,8 @@
                      v-bind:inputseparator="inputseparator"
                      v-bind:placeholder="placeholder"
                      v-bind:popuptitle="popuptitle"
-                     v-bind:validatorname="validatorname">
+                     v-bind:validatorname="validatorname"
+                     v-bind:hasheaderline="hasheaderline">
         </paste-modal>
         <button class="btn btn-default btn-md" id="show-file2ds" v-if="activateFile2DsButton"
                 v-on:click="showFile2DS = true">{{label+" (csv)"}}
@@ -37,7 +38,8 @@
             'uploadaccept',
             'uploadmultiple',
             'uploadheaders',
-            'validatorname'
+            'validatorname',
+            'hasheaderline'
         ],
         created: function () {
             this.activateFile2DsButton = Boolean(this.uploadurl);

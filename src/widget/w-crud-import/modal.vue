@@ -44,7 +44,7 @@
 
     export default {
         name: 'paste-modal',
-        props: ['importfields', 'noid', 'inputseparator', 'placeholder', 'popuptitle', 'validatorname'],
+        props: ['importfields', 'noid', 'inputseparator', 'placeholder', 'popuptitle', 'validatorname', 'hasheaderline'],
         data: function () {
             return {
                 input: '',
@@ -102,6 +102,10 @@
             },
 
             _writeToStore: function (value) {
+                var hasHeaderLine = JSON.parse(this.hasheaderline);
+                if (hasHeaderLine){
+                    delete value[0];
+                }
                 value.forEach(function (item) {
                     app.$refs.crud.items.post(item);
                 })
