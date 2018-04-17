@@ -57,8 +57,13 @@
                 try {
                     this._validate(parsedValue, this.validatorname);
                 } catch (exception) {
-                    this.alertFail = exception;
-                    return;
+                    if (typeof(exception) === 'string') {
+                        this.alertFail = exception;
+                        return;
+                    } else {
+                        this.alertFail = exception.message;
+                        return;
+                    }
                 }
                 this._writeToStore(parsedValue);
                 this.$emit('close');
@@ -71,13 +76,13 @@
                 value = value.split("\n");
                 var tableColumns = self._getTableColumns(self.noid, self.importfields);
                 value.forEach(function (row) {
-                        var items = row.split(self.inputseparator);
-                        var result = {};
-                        tableColumns.forEach(function (column, index) {
-                            result[column] = (items[index] === undefined ? "" : items[index]);
-                        });
-                    parsedValue.push(result)
+                    var items = row.split(self.inputseparator);
+                    var result = {};
+                    tableColumns.forEach(function (column, index) {
+                        result[column] = (items[index] === undefined ? "" : items[index]);
                     });
+                    parsedValue.push(result)
+                });
                 return parsedValue;
             },
 
@@ -95,15 +100,18 @@
             },
 
             _validate: function (value, validatorName) {
-                var validatorFunction = window[validatorName];
-                if (typeof validatorFunction === 'function') {
-                    validatorFunction(value);
+                if (window[validatorName]) {
+                    var validatorFunction = window[validatorName];
+                    if (typeof validatorFunction === 'function') {
+                        var testValue = Object.assign({}, value);
+                        validatorFunction(testValue);
+                    } else throw new Error('Неправильный валидатор');
                 }
             },
 
             _writeToStore: function (value) {
                 var hasHeaderLine = JSON.parse(this.hasheaderline);
-                if (hasHeaderLine){
+                if (hasHeaderLine) {
                     delete value[0];
                 }
                 value.forEach(function (item) {
