@@ -15,7 +15,6 @@ function DojoDataSource(store, options) {
     this._schema = options.schema || {};
     this._post_process = options.post_process;
     this._on_load = options.on_load;
-    //this._filter = _.clone(store);
 }
 
 /**
@@ -127,8 +126,8 @@ DojoDataSource.prototype.fetch = function (request, post_process) {
             let args = [];
             group.args.forEach(function (arg) {
                 if (arg.op === '$and' || arg.op == '$or') {
-                    //args.push(make_query(arg));
-                } else if (arg.expr !== '$no_column' && !_.isEmpty(arg.value)) {
+                    args.push(make_query(arg));
+                } else if (arg.expr !== '$no_column') {
                     if (arg.expr === '$like') {
                         args.push(Q().contains(arg.column, arg.value).args[0]);
                     }
@@ -152,6 +151,21 @@ DojoDataSource.prototype.fetch = function (request, post_process) {
                     }
                     if (arg.expr === '$ge') {
                         args.push(Q().ge(arg.column, arg.value).args[0]);
+                    }
+                    if (arg.expr === '$isnull') {
+                        args.push(Q().or(
+                            Q({name: 'eq', args: [arg.column, 'empty()']}),
+                            Q({name: 'eq', args: [arg.column, 'null()']})
+                        ).args[0]);
+                    }
+                    if (arg.expr === '$not_isnull') {
+                        args.push(Q().not(Q({
+                            name: 'or',
+                            args: [
+                                Q({name: 'eq', args: [arg.column, 'empty()']}),
+                                Q({name: 'eq', args: [arg.column, 'null()']})
+                            ]
+                        })).args[0]);
                     }
                 }
             });
@@ -210,17 +224,4 @@ DojoDataSource.prototype.fetch = function (request, post_process) {
 
     return result;
 };
-
-/*
-
-
-
- DojoDataSource.prototype.load = function (id) {
- return $.ajax({
- url: this._url + '/' + id,
- type: 'GET'
- });
- };
- */
-
 export default DojoDataSource;
