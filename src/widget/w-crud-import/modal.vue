@@ -103,7 +103,7 @@
                 if (window[validatorName]) {
                     var validatorFunction = window[validatorName];
                     if (typeof validatorFunction === 'function') {
-                        var testValue = Object.assign({}, value);
+                        var testValue = Object.assign([], value);
                         validatorFunction(testValue);
                     } else throw new Error('Неправильный валидатор');
                 }
