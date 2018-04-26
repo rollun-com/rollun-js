@@ -132,7 +132,7 @@ DojoDataSource.prototype.fetch = function (request, post_process) {
                         args.push(Q().contains(arg.column, arg.value).args[0]);
                     }
                     if (arg.expr === '$not_like') {
-                        args.push(Q().not(Q().contains(arg.column, arg.value)).args[0]);
+                        args.push(Q().not(Q({name: 'contains', args: [arg.column, arg.value]})).args[0]);
                     }
                     if (arg.expr === '$eq') {
                         args.push(Q().eq(arg.column, arg.value).args[0]);
