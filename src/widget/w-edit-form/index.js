@@ -8,8 +8,7 @@ export default {
     data(){
         return {
             visible: false,
-            form: {},
-            state: {}
+            form: {}
         }
     },
     methods: {
@@ -20,7 +19,6 @@ export default {
             let self = this;
             if (data) {
                 this.form = {};
-                this.state = {};
                 this.$nextTick(function () {
                     self.form = data.form || self.form;
                     self.state = data.state || self.state;

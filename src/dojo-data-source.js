@@ -125,7 +125,7 @@ DojoDataSource.prototype.fetch = function (request, post_process) {
             const op = group.op;
             let args = [];
             group.args.forEach(function (arg) {
-                if (arg.op === '$and' || arg.op == '$or') {
+                if (arg.op === '$and' || arg.op === '$or') {
                     args.push(make_query(arg));
                 } else if (arg.expr !== '$no_column') {
                     if (arg.expr === '$like') {
