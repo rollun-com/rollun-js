@@ -5,6 +5,7 @@ import wCrudApp from './src/widget/w-crud-app'
 import wAdvCrudApp from './src/widget/w-adv-crud-app/AdvCrudApp.js'
 import wEditForm from './src/widget/w-edit-form'
 import wString from './src/widget/w-string'
+import wStringDisabled from './src/widget/w-string-disabled'
 import wNumber from './src/widget/w-number'
 import wDate from './src/widget/w-date'
 import wText from './src/widget/w-text'
@@ -18,30 +19,31 @@ import mitt from 'mitt';
 import DojoDataSource from './src/dojo-data-source'
 
 const components = [
-    wCrudApp,
-    wAdvCrudApp,
-    wEditForm,
-    wString,
-    wNumber,
-    wDate,
-    wText,
-    wCheckBox,
-    wCrudImport,
-    wCrudFile2DS,
-    wFbaFee
+	wCrudApp,
+	wAdvCrudApp,
+	wEditForm,
+	wString,
+	wStringDisabled,
+	wNumber,
+	wDate,
+	wText,
+	wCheckBox,
+	wCrudImport,
+	wCrudFile2DS,
+	wFbaFee
 ];
 
 components.map(function (c) {
-    Vue.component(c.name, c);
+	Vue.component(c.name, c);
 });
 
 Vue.prototype.$bus = mitt();
 Vue.prototype.$ds = function (url, options) {
-    return new DojoDataSource(new RqlStore({target: url}), options);
+	return new DojoDataSource(new RqlStore({target: url}), options);
 };
 
 module.exports = {
-    app: function (config) {
-        return new Vue(config);
-    }
+	app: function (config) {
+		return new Vue(config);
+	}
 };
