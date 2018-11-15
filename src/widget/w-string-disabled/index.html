@@ -1,0 +1,9 @@
+<div :id="options.uid" class="form-group w-string-disabled" v-show="visibility">
+    <label v-if="options.label">{{ options.label }}</label>
+    <input type="text"
+           class="form-control disabled"
+           @change="onchange"
+           @keyup="onkeyup"
+           :disabled=true
+           v-model="state[options.bind]"/>
+</div>
