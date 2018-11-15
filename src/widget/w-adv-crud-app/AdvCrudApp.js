@@ -13,7 +13,7 @@ export default {
             };
             _.forEach(this.items.schema(), function (column, column_name) {
                 edit_form.widgets.push({
-                    type: (app.$refs.crud.options.widget_type[column_name] === undefined ? "w-string" : app.$refs.crud.options.widget_type[column_name]),
+                    type: (app.$refs.crud.options.widget_types[column_name] === undefined ? "w-string" : app.$refs.crud.options.widget_types[column_name]),
                     label: column_name,
                     bind: column_name,
                     disabled: column.pk
